@@ -1,0 +1,142 @@
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    background: url('../images/abstract-stucco-texture-1142801.jpg') #dddddd;
+}
+
+#page-body::after {
+    content: '';
+    display: block;
+    height: 54px;
+}
+
+header {
+    width: 100%;
+    height: 76px;
+    border: none;
+    border-bottom: 1px solid #999999;
+    background: #ffffff;
+}
+
+#top {
+    margin: 0 auto;
+    width: 960px;
+    padding: 20px;
+    background: #ffffff;
+}
+
+#name {
+    background: #4aaaa5;
+    color: #ffffff;
+    display: inline;
+    padding: 22px;
+    font-family: 'Georgia', Times, Times New Roman, serif;
+    font-size: 30px;
+}
+
+.top-link {
+    color: #aaaaaa;
+    text-decoration: none;
+    float: right;
+    padding: 0px 15px 0px 15px;
+    margin: 10px 0px 10px 0px;
+    border-right: 1px solid #eeeeee;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.top-link:hover {
+    color: #bbbbbb;
+}
+
+#top-right-link {
+    border: none;
+}
+
+#middle {
+    margin: 20px auto;
+    padding: 25px;
+    width: 960px;
+    border: 1px solid #999999;
+    background: #ffffff;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 14px;
+    color: #999999;
+}
+
+.page-headline {
+    color: #4aaaa5;
+    font-family: 'Georgia', Times, Times New Roman, serif;
+    font-size: 30px;
+}
+
+#profile-image {
+    padding: 10px;
+}
+
+.image-box {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 10px;
+    height: 200px;
+    width: 200px;
+}
+
+.image-text-box {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #4aaaa5;
+    color: #ffffff;
+    text-align: center;
+    z-index: 3;
+}
+
+footer {
+    background: #555555;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 54px;
+    margin: 0;
+    border-top: 5px solid #4aaaa5
+}
+
+#copyright {
+    position: absolute;
+    color: #cccccc;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 11px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+    margin: 0 auto;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+textarea {
+    height: 200px;
+}
+
+input[type="submit"] {
+    background: #4aaaa5;
+    border: none;
+    color: white;
+    text-decoration: none;
+    padding: 10px 25px;
+}
