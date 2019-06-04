@@ -25,7 +25,7 @@ header {
 
 #top {
     margin: 0 auto;
-    width: 960px;
+    width: 920px;
     padding: 20px;
     background: #ffffff;
 }
@@ -61,7 +61,7 @@ header {
 #middle {
     margin: 20px auto;
     padding: 25px;
-    width: 960px;
+    width: 908px;
     border: 1px solid #999999;
     background: #ffffff;
     font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
@@ -139,4 +139,47 @@ input[type="submit"] {
     color: white;
     text-decoration: none;
     padding: 10px 25px;
+}
+
+@media only screen and (max-width: 980px) {
+    #top {
+        width: 90%;
+        margin: 0;
+    }
+    #middle {
+        margin: 20px;
+        width: 593px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #top {
+        width: 93%;
+    }
+    #middle {
+        margin: 5px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    header {
+        height: 99px
+    }
+    #top {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #name {
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        padding: 12px;
+    }
+    #header-object{
+        height: 100px;
+    }
 }
