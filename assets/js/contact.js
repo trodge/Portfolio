@@ -1,10 +1,12 @@
 $(document).ready(() => {
+    const subtle = crypto.subtle;
     const enc = new TextEncoder();
+    const dec = new TextDecoder();
     const form = $('form');
     form.submit(event => {
         event.preventDefault();
         message = {};
-        window.crypto.subtle.importKey(
+        subtle.importKey(
             'jwk', //can be 'jwk' (public or private), 'spki' (public only), or 'pkcs8' (private only)
             {   //this is an example jwk key, other key types are Uint8Array objects
                 kty: 'RSA',
@@ -25,25 +27,26 @@ $(document).ready(() => {
             form.children('input, textarea').each((i, element) => {
                 const elem = $(element);
                 //returns a publicKey (or privateKey if you are importing a private key)
-                names.push(elem.attr('name'));
-                promises.push(window.crypto.subtle.encrypt(
+                const name = elem.attr('name');
+                if (!name) return;
+                names.push(name);
+                promises.push(subtle.encrypt(
                     { name: 'RSA-OAEP' },
                     publicKey,
                     enc.encode(elem.val())
                 ));
-                Promise.all(promises).then(encrypted => {
-                    for (let i = 0; i < encrypted.length; ++i) {
-                        //returns an ArrayBuffer containing the encrypted data
-                        console.log(new Uint8Array(encrypted[i]));
-                        message[names[i]] = encrypted[i];
-                    }
-                    $.post('https://contactee.herokuapp.com/', { data: message }, () => {
-                        console.log(message);
-                    });
-                }).catch(function (err) {
-                    console.error(err);
-                });
             });
+            Promise.all(promises).then(encrypted => {
+                for (let i = 0; i < encrypted.length; ++i)
+                    //returns an ArrayBuffer containing the encrypted data
+                    message[names[i]] = dec.decode(encrypted[i]);
+                $.post('http://localhost:8080', message, () => {
+                    console.log('POST', message);
+                }).catch(err => console.log(err));
+            }).catch(function (err) {
+                console.error(err);
+            });
+
         }).catch(function (err) {
             console.error(err);
         });
