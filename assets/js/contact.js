@@ -1,7 +1,10 @@
+function ab2str(buf) {
+    return String.fromCharCode.apply(null, new Uint8Array(buf));
+}
+
 $(document).ready(() => {
     const subtle = crypto.subtle;
     const enc = new TextEncoder();
-    const dec = new TextDecoder();
     const form = $('form');
     form.submit(event => {
         event.preventDefault();
@@ -39,7 +42,7 @@ $(document).ready(() => {
             Promise.all(promises).then(encrypted => {
                 for (let i = 0; i < encrypted.length; ++i)
                     //returns an ArrayBuffer containing the encrypted data
-                    message[names[i]] = dec.decode(encrypted[i]);
+                    message[names[i]] = ab2str(encrypted[i]);
                 $.post('http://localhost:8080', message, () => {
                     console.log('POST', message);
                 }).catch(err => console.log(err));
