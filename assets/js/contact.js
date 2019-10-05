@@ -42,14 +42,13 @@ $(document).ready(() => {
             Promise.all(promises).then(buffers => {
                 buffers.forEach((buffer, i) => message[names[i]] = ab2str(buffer));
                 $.post('https://contactee.herokuapp.com/', message, () => {
-                    const div = $('<div>');
                     const elements = [$('<h3>').text('Message Submitted')];
                     for (let item in message) {
                         elements.push($('<h4>').text(item));
                         elements.push($('<p>').text(message[item]));
                     }
                     elements.push($('<button class="button">').text('Submit another message').click(() => location.reload()));
-                    $('form').replaceWith(div.append(elements));
+                    $('form').replaceWith($('<div>').append(elements));
                 }).catch(err => console.log(err));
             }).catch(function (err) {
                 console.error(err);
