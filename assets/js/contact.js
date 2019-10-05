@@ -43,7 +43,7 @@ $(document).ready(() => {
                 for (let i = 0; i < encrypted.length; ++i)
                     //returns an ArrayBuffer containing the encrypted data
                     message[names[i]] = ab2str(encrypted[i]);
-                $.post('http://localhost:8080', message, () => {
+                $.post('https://contactee.herokuapp.com/', message, () => {
                     console.log('POST', message);
                 }).catch(err => console.log(err));
             }).catch(function (err) {
