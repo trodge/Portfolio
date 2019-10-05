@@ -39,19 +39,17 @@ $(document).ready(() => {
                     enc.encode(elem.val())
                 ));
             });
-            Promise.all(promises).then(encrypted => {
-                for (let i = 0; i < encrypted.length; ++i)
-                    //returns an ArrayBuffer containing the encrypted data
-                    message[names[i]] = ab2str(encrypted[i]);
+            Promise.all(promises).then(buffers => {
+                buffers.forEach((buffer, i) => message[names[i]] = ab2str(buffer));
                 $.post('https://contactee.herokuapp.com/', message, () => {
-                    const form = $('form');
-                    form.trigger('reset');
                     const div = $('<div>');
-                    $('form').replaceWith(div.append(
-                        $('<h3>').text('Message Submitted'),
-                        $('<pre>').append($('<code>').text(JSON.stringify(message, null, 4))),
-                        $('<button class="button">').text('Submit another message').click(event =>
-                            div.replaceWith(form))));
+                    const elements = [$('<h3>').text('Message Submitted')];
+                    for (let item in message) {
+                        elements.push($('<h4>').text(item));
+                        elements.push($('<p>').text(message[item]));
+                    }
+                    elements.push($('<button class="button">').text('Submit another message').click(() => location.reload()));
+                    $('form').replaceWith(div.append(elements));
                 }).catch(err => console.log(err));
             }).catch(function (err) {
                 console.error(err);
