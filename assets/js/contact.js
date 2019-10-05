@@ -44,7 +44,14 @@ $(document).ready(() => {
                     //returns an ArrayBuffer containing the encrypted data
                     message[names[i]] = ab2str(encrypted[i]);
                 $.post('https://contactee.herokuapp.com/', message, () => {
-                    console.log('POST', message);
+                    const form = $('form');
+                    form.trigger('reset');
+                    const div = $('<div>');
+                    $('form').replaceWith(div.append(
+                        $('<h3>').text('Message Submitted'),
+                        $('<pre>').append($('<code>').text(JSON.stringify(message, null, 4))),
+                        $('<button class="button">').text('Submit another message').click(event =>
+                            div.replaceWith(form))));
                 }).catch(err => console.log(err));
             }).catch(function (err) {
                 console.error(err);

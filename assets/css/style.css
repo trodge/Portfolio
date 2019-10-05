@@ -109,8 +109,11 @@ a:hover {
     line-height: 40px;
     background: #4aaaa5;
     color: #ffffff;
-    text-align: center;
     z-index: 3;
+}
+
+.centered {
+    text-align: center
 }
 
 footer {
@@ -145,12 +148,16 @@ textarea {
     height: 200px;
 }
 
-input[type="submit"] {
+.button {
     background: #4aaaa5;
     border: none;
     color: white;
     text-decoration: none;
     padding: 10px 25px;
+}
+
+pre {
+    white-space: pre-wrap;
 }
 
 @media only screen and (max-width: 980px) {
@@ -191,7 +198,6 @@ input[type="submit"] {
     }
     #name {
         display: block;
-        text-align: center;
         margin: 0;
         padding: 12px;
     }
