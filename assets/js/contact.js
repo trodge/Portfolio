@@ -26,28 +26,34 @@ $(document).ready(() => {
             ['encrypt'] //'encrypt' or 'wrapKey' for public key import or
             //'decrypt' or 'unwrapKey' for private key imports
         ).then(publicKey => {
-            const promises = [], names = [];
+            const subtlePromises = [], names = [];
             form.children('input, textarea').each((i, element) => {
                 const elem = $(element);
                 //returns a publicKey (or privateKey if you are importing a private key)
                 const name = elem.attr('name');
                 if (!name) return;
                 names.push(name);
-                promises.push(subtle.encrypt(
+                subtlePromises.push(subtle.encrypt(
                     { name: 'RSA-OAEP' },
                     publicKey,
                     enc.encode(elem.val())
                 ));
             });
-            Promise.all(promises).then(buffers => {
+            // Wait for encryption to take place.
+            Promise.all(subtlePromises).then(buffers => {
+                // Convert arraybuffers to strings.
                 buffers.forEach((buffer, i) => message[names[i]] = ab2str(buffer));
+                // Post said strings to heroku.
                 $.post('https://contactee.herokuapp.com/', message, () => {
+                    // Inform user that their message is submitted.
                     const elements = [$('<h3>').text('Message Submitted')];
                     for (let item in message) {
                         elements.push($('<h4>').text(item));
                         elements.push($('<p>').text(message[item]));
                     }
-                    elements.push($('<button class="button">').text('Submit another message').click(() => location.reload()));
+                    elements.push($('<button class="button">')
+                        .text('Submit another message')
+                        .click(() => location.reload()));
                     $('form').replaceWith($('<div>').append(elements));
                 }).catch(err => console.log(err));
             }).catch(function (err) {
