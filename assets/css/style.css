@@ -211,4 +211,7 @@ textarea {
     img {
         width: 100%;
     }
+    #about {
+        height: 120vh;
+    }
 }
