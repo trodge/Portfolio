@@ -81,6 +81,10 @@ a:hover {
     color: #999999;
 }
 
+#about {
+    height: 50vh;
+}
+
 .page-headline {
     color: #7e5303;
     font-family: 'Georgia', Times, Times New Roman, serif;
